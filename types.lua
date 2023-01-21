@@ -1,0 +1,744 @@
+------------------------------------------------------------
+-- types
+------------------------------------------------------------
+---@class Vector2
+---@field Set fun(newX: number, newY: number): void
+---@field Lerp fun(a: Vector2, b: Vector2, t: number): Vector2
+---@field LerpUnclamped fun(a: Vector2, b: Vector2, t: number): Vector2
+---@field MoveTowards fun(current: Vector2, target: Vector2, maxDistanceDelta: number): Vector2
+---@field Scale fun(a: Vector2, b: Vector2): Vector2
+---@field Normalize fun(): void
+---@field ToString fun(): string
+---@field GetHashCode fun(): number
+---@field Reflect fun(inDirection: Vector2, inNormal: Vector2): Vector2
+---@field Perpendicular fun(inDirection: Vector2): Vector2
+---@field Dot fun(lhs: Vector2, rhs: Vector2): number
+---@field Angle fun(from: Vector2, to: Vector2): number
+---@field SignedAngle fun(from: Vector2, to: Vector2): number
+---@field Distance fun(a: Vector2, b: Vector2): number
+---@field ClampMagnitude fun(vector: Vector2, maxLength: number): Vector2
+---@field SqrMagnitude fun(a: Vector2): number
+---@field Min fun(lhs: Vector2, rhs: Vector2): Vector2
+---@field Max fun(lhs: Vector2, rhs: Vector2): Vector2
+---@field SmoothDamp fun(current: Vector2, target: Vector2, currentVelocity: usertype, smoothTime: number, maxSpeed: number): Vector2
+---@field __new fun(x: number, y: number): Vector2
+---@field Item number
+---@field normalized Vector2
+---@field magnitude number
+---@field sqrMagnitude number
+---@field zero Vector2
+---@field one Vector2
+---@field up Vector2
+---@field down Vector2
+---@field left Vector2
+---@field right Vector2
+---@field positiveInfinity Vector2
+---@field negativeInfinity Vector2
+---@field x number
+---@field y number
+---@field kEpsilon number
+---@field kEpsilonNormalSqrt number
+Vector2 = {}
+
+---@class Vector3
+---@field Slerp fun(a: Vector3, b: Vector3, t: number): Vector3
+---@field SlerpUnclamped fun(a: Vector3, b: Vector3, t: number): Vector3
+---@field OrthoNormalize fun(normal: usertype, tangent: usertype): void
+---@field RotateTowards fun(current: Vector3, target: Vector3, maxRadiansDelta: number, maxMagnitudeDelta: number): Vector3
+---@field Lerp fun(a: Vector3, b: Vector3, t: number): Vector3
+---@field LerpUnclamped fun(a: Vector3, b: Vector3, t: number): Vector3
+---@field MoveTowards fun(current: Vector3, target: Vector3, maxDistanceDelta: number): Vector3
+---@field SmoothDamp fun(current: Vector3, target: Vector3, currentVelocity: usertype, smoothTime: number, maxSpeed: number): Vector3
+---@field Set fun(newX: number, newY: number, newZ: number): void
+---@field Scale fun(a: Vector3, b: Vector3): Vector3
+---@field Cross fun(lhs: Vector3, rhs: Vector3): Vector3
+---@field GetHashCode fun(): number
+---@field Reflect fun(inDirection: Vector3, inNormal: Vector3): Vector3
+---@field Normalize fun(value: Vector3): Vector3
+---@field Dot fun(lhs: Vector3, rhs: Vector3): number
+---@field Project fun(vector: Vector3, onNormal: Vector3): Vector3
+---@field ProjectOnPlane fun(vector: Vector3, planeNormal: Vector3): Vector3
+---@field Angle fun(from: Vector3, to: Vector3): number
+---@field SignedAngle fun(from: Vector3, to: Vector3, axis: Vector3): number
+---@field Distance fun(a: Vector3, b: Vector3): number
+---@field ClampMagnitude fun(vector: Vector3, maxLength: number): Vector3
+---@field Magnitude fun(vector: Vector3): number
+---@field SqrMagnitude fun(vector: Vector3): number
+---@field Min fun(lhs: Vector3, rhs: Vector3): Vector3
+---@field Max fun(lhs: Vector3, rhs: Vector3): Vector3
+---@field ToString fun(): string
+---@field AngleBetween fun(from: Vector3, to: Vector3): number
+---@field Exclude fun(excludeThis: Vector3, fromThat: Vector3): Vector3
+---@field __new fun(x: number, y: number, z: number): Vector3
+---@field Item number
+---@field normalized Vector3
+---@field magnitude number
+---@field sqrMagnitude number
+---@field zero Vector3
+---@field one Vector3
+---@field forward Vector3
+---@field back Vector3
+---@field up Vector3
+---@field down Vector3
+---@field left Vector3
+---@field right Vector3
+---@field positiveInfinity Vector3
+---@field negativeInfinity Vector3
+---@field fwd Vector3
+---@field kEpsilon number
+---@field kEpsilonNormalSqrt number
+---@field x number
+---@field y number
+---@field z number
+Vector3 = {}
+
+---@class Vector4
+---@field Set fun(newX: number, newY: number, newZ: number, newW: number): void
+---@field Lerp fun(a: Vector4, b: Vector4, t: number): Vector4
+---@field LerpUnclamped fun(a: Vector4, b: Vector4, t: number): Vector4
+---@field MoveTowards fun(current: Vector4, target: Vector4, maxDistanceDelta: number): Vector4
+---@field Scale fun(a: Vector4, b: Vector4): Vector4
+---@field GetHashCode fun(): number
+---@field Normalize fun(a: Vector4): Vector4
+---@field Dot fun(a: Vector4, b: Vector4): number
+---@field Project fun(a: Vector4, b: Vector4): Vector4
+---@field Distance fun(a: Vector4, b: Vector4): number
+---@field Magnitude fun(a: Vector4): number
+---@field Min fun(lhs: Vector4, rhs: Vector4): Vector4
+---@field Max fun(lhs: Vector4, rhs: Vector4): Vector4
+---@field ToString fun(): string
+---@field SqrMagnitude fun(a: Vector4): number
+---@field __new fun(x: number, y: number, z: number, w: number): Vector4
+---@field Item number
+---@field normalized Vector4
+---@field magnitude number
+---@field sqrMagnitude number
+---@field zero Vector4
+---@field one Vector4
+---@field positiveInfinity Vector4
+---@field negativeInfinity Vector4
+---@field kEpsilon number
+---@field x number
+---@field y number
+---@field z number
+---@field w number
+Vector4 = {}
+
+---@class Color
+---@field ToString fun(): string
+---@field GetHashCode fun(): number
+---@field Lerp fun(a: Color, b: Color, t: number): Color
+---@field LerpUnclamped fun(a: Color, b: Color, t: number): Color
+---@field RGBToHSV fun(rgbColor: Color, H: usertype, S: usertype, V: usertype): void
+---@field HSVToRGB fun(H: number, S: number, V: number): Color
+---@field __new fun(r: number, g: number, b: number, a: number): Color
+---@field red Color
+---@field green Color
+---@field blue Color
+---@field white Color
+---@field black Color
+---@field yellow Color
+---@field cyan Color
+---@field magenta Color
+---@field gray Color
+---@field grey Color
+---@field clear Color
+---@field grayscale number
+---@field linear Color
+---@field gamma Color
+---@field maxColorComponent number
+---@field Item number
+---@field r number
+---@field g number
+---@field b number
+---@field a number
+Color = {}
+
+---@class Quaternion
+---@field FromToRotation fun(fromDirection: Vector3, toDirection: Vector3): Quaternion
+---@field Inverse fun(rotation: Quaternion): Quaternion
+---@field Slerp fun(a: Quaternion, b: Quaternion, t: number): Quaternion
+---@field SlerpUnclamped fun(a: Quaternion, b: Quaternion, t: number): Quaternion
+---@field Lerp fun(a: Quaternion, b: Quaternion, t: number): Quaternion
+---@field LerpUnclamped fun(a: Quaternion, b: Quaternion, t: number): Quaternion
+---@field AngleAxis fun(angle: number, axis: Vector3): Quaternion
+---@field LookRotation fun(forward: Vector3, upwards: Vector3): Quaternion
+---@field Set fun(newX: number, newY: number, newZ: number, newW: number): void
+---@field Dot fun(a: Quaternion, b: Quaternion): number
+---@field SetLookRotation fun(view: Vector3): void
+---@field Angle fun(a: Quaternion, b: Quaternion): number
+---@field Euler fun(x: number, y: number, z: number): Quaternion
+---@field ToAngleAxis fun(angle: usertype, axis: usertype): void
+---@field SetFromToRotation fun(fromDirection: Vector3, toDirection: Vector3): void
+---@field RotateTowards fun(from: Quaternion, to: Quaternion, maxDegreesDelta: number): Quaternion
+---@field Normalize fun(q: Quaternion): Quaternion
+---@field GetHashCode fun(): number
+---@field ToString fun(): string
+---@field EulerRotation fun(x: number, y: number, z: number): Quaternion
+---@field SetEulerRotation fun(x: number, y: number, z: number): void
+---@field ToEuler fun(): Vector3
+---@field EulerAngles fun(x: number, y: number, z: number): Quaternion
+---@field ToAxisAngle fun(axis: usertype, angle: usertype): void
+---@field SetEulerAngles fun(x: number, y: number, z: number): void
+---@field ToEulerAngles fun(rotation: Quaternion): Vector3
+---@field SetAxisAngle fun(axis: Vector3, angle: number): void
+---@field AxisAngle fun(axis: Vector3, angle: number): Quaternion
+---@field __new fun(x: number, y: number, z: number, w: number): Quaternion
+---@field Item number
+---@field identity Quaternion
+---@field eulerAngles Vector3
+---@field normalized Quaternion
+---@field x number
+---@field y number
+---@field z number
+---@field w number
+---@field kEpsilon number
+Quaternion = {}
+
+---@class Matrix4x4
+---@field ValidTRS fun(): boolean
+---@field Determinant fun(m: Matrix4x4): number
+---@field TRS fun(pos: Vector3, q: Quaternion, s: Vector3): Matrix4x4
+---@field SetTRS fun(pos: Vector3, q: Quaternion, s: Vector3): void
+---@field Inverse3DAffine fun(input: Matrix4x4, result: usertype): boolean
+---@field Inverse fun(m: Matrix4x4): Matrix4x4
+---@field Transpose fun(m: Matrix4x4): Matrix4x4
+---@field Ortho fun(left: number, right: number, bottom: number, top: number, zNear: number, zFar: number): Matrix4x4
+---@field Perspective fun(fov: number, aspect: number, zNear: number, zFar: number): Matrix4x4
+---@field LookAt fun(from: Vector3, to: Vector3, up: Vector3): Matrix4x4
+---@field Frustum fun(left: number, right: number, bottom: number, top: number, zNear: number, zFar: number): Matrix4x4
+---@field GetHashCode fun(): number
+---@field GetColumn fun(index: number): Vector4
+---@field GetRow fun(index: number): Vector4
+---@field GetPosition fun(): Vector3
+---@field SetColumn fun(index: number, column: Vector4): void
+---@field SetRow fun(index: number, row: Vector4): void
+---@field MultiplyPoint fun(point: Vector3): Vector3
+---@field MultiplyPoint3x4 fun(point: Vector3): Vector3
+---@field MultiplyVector fun(vector: Vector3): Vector3
+---@field TransformPlane fun(plane: usertype): usertype
+---@field Scale fun(vector: Vector3): Matrix4x4
+---@field Translate fun(vector: Vector3): Matrix4x4
+---@field Rotate fun(q: Quaternion): Matrix4x4
+---@field ToString fun(): string
+---@field __new fun(column0: Vector4, column1: Vector4, column2: Vector4, column3: Vector4): Matrix4x4
+---@field rotation Quaternion
+---@field lossyScale Vector3
+---@field isIdentity boolean
+---@field determinant number
+---@field decomposeProjection usertype
+---@field inverse Matrix4x4
+---@field transpose Matrix4x4
+---@field Item number
+---@field zero Matrix4x4
+---@field identity Matrix4x4
+---@field m00 number
+---@field m10 number
+---@field m20 number
+---@field m30 number
+---@field m01 number
+---@field m11 number
+---@field m21 number
+---@field m31 number
+---@field m02 number
+---@field m12 number
+---@field m22 number
+---@field m32 number
+---@field m03 number
+---@field m13 number
+---@field m23 number
+---@field m33 number
+Matrix4x4 = {}
+
+---@class TimeSpan
+---@field Add fun(ts: TimeSpan): TimeSpan
+---@field Compare fun(t1: TimeSpan, t2: TimeSpan): number
+---@field CompareTo fun(value: usertype): number
+---@field FromDays fun(value: number): TimeSpan
+---@field Duration fun(): TimeSpan
+---@field GetHashCode fun(): number
+---@field FromHours fun(value: number): TimeSpan
+---@field FromMilliseconds fun(value: number): TimeSpan
+---@field FromMinutes fun(value: number): TimeSpan
+---@field Negate fun(): TimeSpan
+---@field FromSeconds fun(value: number): TimeSpan
+---@field Subtract fun(ts: TimeSpan): TimeSpan
+---@field Multiply fun(factor: number): TimeSpan
+---@field Divide fun(divisor: number): TimeSpan
+---@field FromTicks fun(value: number): TimeSpan
+---@field Parse fun(s: string): TimeSpan
+---@field ParseExact fun(input: string, format: string, formatProvider: usertype): TimeSpan
+---@field TryParse fun(s: string, result: usertype): boolean
+---@field TryParseExact fun(input: string, format: string, formatProvider: usertype, result: usertype): boolean
+---@field ToString fun(): string
+---@field TryFormat fun(destination: usertype, charsWritten: usertype, format: usertype, formatProvider: usertype): boolean
+---@field __new fun(ticks: number): TimeSpan
+---@field Ticks number
+---@field Days number
+---@field Hours number
+---@field Milliseconds number
+---@field Minutes number
+---@field Seconds number
+---@field TotalDays number
+---@field TotalHours number
+---@field TotalMilliseconds number
+---@field TotalMinutes number
+---@field TotalSeconds number
+---@field TicksPerMillisecond number
+---@field TicksPerSecond number
+---@field TicksPerMinute number
+---@field TicksPerHour number
+---@field TicksPerDay number
+---@field Zero TimeSpan
+---@field MaxValue TimeSpan
+---@field MinValue TimeSpan
+TimeSpan = {}
+
+---vci module
+---@class vci
+---@field ResetRootTransform fun(): void
+---@field _ALL_ResetRootTransform fun(): void
+---@field StartCoroutine fun(coroutine: usertype): void
+---@field studio ExportStudio
+---@field me ExportMe
+---@field assets ExportAssets
+---@field state ExportState
+---@field message ExportMessage
+---@field cameraSystem ExportCameraSystem
+---@field forceMode ExportForceMode
+---@field vc ExportVc
+vci = {}
+
+---スタジオ情報
+---@class ExportStudio
+---@field GetOwner fun(): ExportAvatar
+---@field GetLocalAvatar fun(): ExportAvatar
+---@field GetAvatars fun(): ExportAvatar[]
+---@field GetMic fun(): ExportSystemItem
+---@field HasMic fun(): boolean
+---@field GetLightSource fun(): ExportSystemItem
+---@field HasLightSource fun(): boolean
+---@field GetMirror fun(): ExportSystemItem
+---@field HasMirror fun(): boolean
+---@field GetHarisen fun(): ExportSystemItem
+---@field HasHarisen fun(): boolean
+---@field GetMosaic fun(): ExportSystemItem
+---@field HasMosaic fun(): boolean
+---@field GetHammer fun(): ExportSystemItem
+---@field HasHammer fun(): boolean
+---@field GetWindowCamera fun(): ExportSystemCamera
+---@field HasWindowCamera fun(): boolean
+---@field GetHandiCamera fun(): ExportSystemCamera
+---@field HasHandiCamera fun(): boolean
+---@field GetAutoFollowCamera fun(): ExportSystemCamera
+---@field HasAutoFollowCamera fun(): boolean
+---@field GetSwitchingCamera fun(): ExportSystemCamera
+---@field HasSwitchingCamera fun(): boolean
+---@field GetNameBoard fun(idOrName: string): ExportSystemItem
+---@field HasNameBoard fun(idOrName: string): boolean
+---@field shared ExportShared
+ExportStudio = {}
+
+---グローバル同期変数
+---@class ExportShared
+---@field Set fun(name: string, value: usertype): void
+---@field Add fun(name: string, value: usertype): void
+---@field Get fun(name: string): usertype
+---@field Bind fun(name: string, callback: usertype): void
+---@field GetHashCode fun(): number
+---@field ToString fun(): string
+ExportShared = {}
+
+---マシンローカルの情報
+---@class ExportMe
+---@field GetAxisInput fun(): Vector3
+---@field GetButtonInput fun(id: number): boolean
+---@field GetHeadMountedDisplayIsMounted fun(): boolean
+---@field GetSystemVersion fun(): string
+---@field CompareSystemVersion fun(version: string): number
+---@field GetHeadMountedDisplayType fun(): string
+---@field GetHeadMountedDisplayName fun(): string
+---@field GetLeftControllerName fun(): string
+---@field GetRightControllerName fun(): string
+---@field GetLanguageCode fun(): string
+---@field FrameCount number
+---@field Time TimeSpan
+---@field UnscaledTime TimeSpan
+ExportMe = {}
+
+---VCIに格納されたアセット
+---@class ExportAssets
+---@field GetInstanceId fun(): string
+---@field GetSubItem fun(name: string): ExportTransform
+---@field GetTransform fun(name: string): ExportTransform
+---@field GetSubItemAttractable fun(name: string): boolean
+---@field GetEffekseerEmitter fun(name: string): ExportEffekseer
+---@field GetEffekseerEmitters fun(name: string): ExportEffekseer[]
+---@field SetMaterialColorFromIndex fun(index: number, color: Color): void
+---@field _ALL_SetMaterialColorFromIndex fun(index: number, color: Color): void
+---@field SetMaterialColorFromName fun(name: string, color: Color): void
+---@field _ALL_SetMaterialColorFromName fun(name: string, color: Color): void
+---@field SetMaterialEmissionColorFromIndex fun(index: number, color: Color): void
+---@field _ALL_SetMaterialEmissionColorFromIndex fun(index: number, color: Color): void
+---@field SetMaterialEmissionColorFromName fun(name: string, color: Color): void
+---@field _ALL_SetMaterialEmissionColorFromName fun(name: string, color: Color): void
+---@field SetMaterialTextureOffsetFromIndex fun(index: number, offset: Vector2): void
+---@field _ALL_SetMaterialTextureOffsetFromIndex fun(index: number, offset: Vector2): void
+---@field SetMaterialTextureOffsetFromName fun(name: string, offset: Vector2): void
+---@field _ALL_SetMaterialTextureOffsetFromName fun(name: string, offset: Vector2): void
+---@field PlayAnimationFromIndex fun(index: number, isloop: boolean): void
+---@field _ALL_PlayAnimationFromIndex fun(index: number, isloop: boolean): void
+---@field PlayAnimationFromName fun(name: string, isloop: boolean): void
+---@field _ALL_PlayAnimationFromName fun(name: string, isloop: boolean): void
+---@field StopAnimation fun(): void
+---@field _ALL_StopAnimation fun(): void
+---@field PlayAudioFromIndex fun(index: number): void
+---@field _ALL_PlayAudioFromIndex fun(index: number): void
+---@field PlayAudioFromName fun(name: string): void
+---@field _ALL_PlayAudioFromName fun(name: string): void
+---@field PauseAudioFromIndex fun(index: number, isPause: boolean): void
+---@field _ALL_PauseAudioFromIndex fun(index: number, isPause: boolean): void
+---@field PauseAudioFromName fun(name: string, isPause: boolean): void
+---@field _ALL_PauseAudioFromName fun(name: string, isPause: boolean): void
+---@field StopAudioFromIndex fun(index: number): void
+---@field _ALL_StopAudioFromIndex fun(index: number): void
+---@field StopAudioFromName fun(name: string): void
+---@field _ALL_StopAudioFromName fun(name: string): void
+---@field HapticPulseOnGrabbingController fun(target: string, strength: number, duration: number): void
+---@field _ALL_HapticPulseOnGrabbingController fun(target: string, strength: number, duration: number): void
+---@field HapticPulseOnTouchingController fun(target: string, strength: number, duration: number): void
+---@field _ALL_HapticPulseOnTouchingController fun(target: string, strength: number, duration: number): void
+---@field SetText fun(id: string, text: string): void
+---@field _ALL_SetText fun(id: string, text: string): void
+---@field SetSubItemAttractable fun(name: string, value: boolean): void
+---@field _ALL_SetSubItemAttractable fun(name: string, value: boolean): void
+---@field IsMine boolean
+---@field audio ExportAudio
+---@field video ExportVideo
+---@field material ExportMaterial
+ExportAssets = {}
+
+---アイテム内同期変数
+---@class ExportState
+---@field Set fun(name: string, value: usertype): void
+---@field Add fun(name: string, value: usertype): void
+---@field Get fun(name: string): usertype
+---@field GetHashCode fun(): number
+---@field ToString fun(): string
+ExportState = {}
+
+---音声
+---@class ExportAudio
+---@field Play fun(name: string, volumeScale: number, isLoop: boolean): void
+---@field _ALL_Play fun(name: string, volumeScale: number, isLoop: boolean): void
+---@field PlayFromIndex fun(index: number, volumeScale: number, isLoop: boolean): void
+---@field _ALL_PlayFromIndex fun(index: number, volumeScale: number, isLoop: boolean): void
+---@field PlayOneShot fun(name: string, volumeScale: number): void
+---@field _ALL_PlayOneShot fun(name: string, volumeScale: number): void
+---@field PlayOneShotFromIndex fun(index: number, volumeScale: number): void
+---@field _ALL_PlayOneShotFromIndex fun(index: number, volumeScale: number): void
+---@field Stop fun(name: string): void
+---@field _ALL_Stop fun(name: string): void
+---@field StopFromIndex fun(index: number): void
+---@field _ALL_StopFromIndex fun(index: number): void
+---@field Pause fun(name: string, isPause: boolean): void
+---@field _ALL_Pause fun(name: string, isPause: boolean): void
+---@field PauseFromIndex fun(index: number, isPause: boolean): void
+---@field _ALL_PauseFromIndex fun(index: number, isPause: boolean): void
+ExportAudio = {}
+
+---アニメーション
+---@class ExportAnimation
+---@field Play fun(isLoop: boolean): void
+---@field _ALL_Play fun(isLoop: boolean): void
+---@field PlayFromIndex fun(index: number, isLoop: boolean): void
+---@field _ALL_PlayFromIndex fun(index: number, isLoop: boolean): void
+---@field PlayFromName fun(name: string, isLoop: boolean): void
+---@field _ALL_PlayFromName fun(name: string, isLoop: boolean): void
+---@field PlayWithState fun(name: string, stateJson: string): void
+---@field _ALL_PlayWithState fun(name: string, stateJson: string): void
+---@field PlayOneShot fun(): void
+---@field _ALL_PlayOneShot fun(): void
+---@field Blend fun(name: string, options: string): void
+---@field _ALL_Blend fun(name: string, options: string): void
+---@field CrossFade fun(name: string, options: string): void
+---@field _ALL_CrossFade fun(name: string, options: string): void
+---@field Stop fun(): void
+---@field _ALL_Stop fun(): void
+---@field Rewind fun(): void
+---@field _ALL_Rewind fun(): void
+---@field SetState fun(name: string, stateJson: string): void
+---@field _ALL_SetState fun(name: string, stateJson: string): void
+---@field GetCount fun(): number
+---@field GetNames fun(): string[]
+---@field HasClip fun(name: string): boolean
+---@field IsPlaying fun(): boolean
+ExportAnimation = {}
+
+---メッセージ(イベント)システム
+---@class ExportMessage
+---@field On fun(messageName: string, callback: usertype): void
+---@field Emit fun(messageName: string, value: usertype): void
+---@field EmitWithId fun(messageName: string, value: usertype, targetId: string): void
+ExportMessage = {}
+
+---@class ExportCameraSystem
+---@field CreatePhotographyCamera fun(followTransform: ExportTransform): ExportPhotographyCamera
+ExportCameraSystem = {}
+
+---SubItem
+---@class ExportTransform
+---@field GetName fun(): string
+---@field GetLocalPosition fun(): Vector3
+---@field GetPosition fun(): Vector3
+---@field GetVelocity fun(): Vector3
+---@field GetAngularVelocity fun(): Vector3
+---@field GetLocalRotation fun(): Quaternion
+---@field GetRotation fun(): Quaternion
+---@field GetLocalScale fun(): Vector3
+---@field GetRight fun(): Vector3
+---@field GetUp fun(): Vector3
+---@field GetForward fun(): Vector3
+---@field GetLocalToWorldMatrix fun(): Matrix4x4
+---@field GetAttractable fun(): boolean
+---@field SetPosition fun(position: Vector3): void
+---@field SetRotation fun(rotation: Quaternion): void
+---@field SetLocalPosition fun(localPosition: Vector3): void
+---@field SetLocalRotation fun(localRotation: Quaternion): void
+---@field SetLocalScale fun(localScale: Vector3): void
+---@field SetVelocity fun(velocity: Vector3): void
+---@field SetAngularVelocity fun(angularVelocity: Vector3): void
+---@field AddForce fun(force: Vector3, forceMode: ExportForceMode): void
+---@field SetAttractable fun(value: boolean): void
+---@field GetAnimation fun(): ExportAnimation
+---@field AttachToAvatar fun(): void
+---@field DetachFromAvatar fun(): void
+---@field GetAttachedPlayer fun(): string
+---@field SetActive fun(isActive: boolean): void
+---@field _ALL_SetActive fun(isActive: boolean): void
+---@field GetAudioSources fun(): ExportAudioSource[]
+---@field IsMine boolean
+---@field IsSubItem boolean
+---@field IsAttached boolean
+---@field AttachableDistance number
+---@field AttachableHumanBodyBones string[]
+---@field ActiveInHierarchy boolean
+---@field ActiveSelf boolean
+ExportTransform = {}
+
+---Effekseer
+---@class ExportEffekseer
+---@field Play fun(): void
+---@field _ALL_Play fun(): void
+---@field PlayOneShot fun(): void
+---@field _ALL_PlayOneShot fun(): void
+---@field Stop fun(): void
+---@field _ALL_Stop fun(): void
+---@field StopImmediate fun(): void
+---@field _ALL_StopImmediate fun(): void
+---@field StopRoot fun(): void
+---@field _ALL_StopRoot fun(): void
+---@field SetAllColor fun(color: Color): void
+---@field _ALL_SetAllColor fun(color: Color): void
+---@field SetTargetLocation fun(targetLocation: Vector3): void
+---@field _ALL_SetTargetLocation fun(targetLocation: Vector3): void
+---@field SetPause fun(paused: boolean): void
+---@field _ALL_SetPause fun(paused: boolean): void
+---@field SetShow fun(shown: boolean): void
+---@field _ALL_SetShow fun(shown: boolean): void
+---@field SetSpeed fun(speed: number): void
+---@field _ALL_SetSpeed fun(speed: number): void
+---@field SetLoop fun(isLoop: boolean): void
+---@field _ALL_SetLoop fun(isLoop: boolean): void
+---@field EffectName string
+ExportEffekseer = {}
+
+---SystemItem
+---@class ExportSystemItem
+---@field GetName fun(): string
+---@field GetCreatorName fun(): string
+---@field GetCreatorId fun(): string
+---@field GetLocalPosition fun(): Vector3
+---@field GetPosition fun(): Vector3
+---@field GetLocalRotation fun(): Quaternion
+---@field GetRotation fun(): Quaternion
+---@field GetLocalScale fun(): Vector3
+---@field GetRight fun(): Vector3
+---@field GetUp fun(): Vector3
+---@field GetForward fun(): Vector3
+---@field GetLocalToWorldMatrix fun(): Matrix4x4
+---@field SetPosition fun(position: Vector3): number
+---@field SetRotation fun(rotation: Quaternion): number
+---@field SetLocalPosition fun(localPosition: Vector3): number
+---@field SetLocalRotation fun(localRotation: Quaternion): number
+---@field IsGrabbed fun(): boolean
+ExportSystemItem = {}
+
+---SystemCamera
+---@class ExportSystemCamera
+---@field SetFieldOfView fun(fov: number): number
+---@field GetFieldOfView fun(): number
+---@field GetMaxFieldOfView fun(): number
+---@field GetMinFieldOfView fun(): number
+---@field GetName fun(): string
+---@field GetCreatorName fun(): string
+---@field GetCreatorId fun(): string
+---@field GetLocalPosition fun(): Vector3
+---@field GetPosition fun(): Vector3
+---@field GetLocalRotation fun(): Quaternion
+---@field GetRotation fun(): Quaternion
+---@field GetLocalScale fun(): Vector3
+---@field GetRight fun(): Vector3
+---@field GetUp fun(): Vector3
+---@field GetForward fun(): Vector3
+---@field GetLocalToWorldMatrix fun(): Matrix4x4
+---@field SetPosition fun(position: Vector3): number
+---@field SetRotation fun(rotation: Quaternion): number
+---@field SetLocalPosition fun(localPosition: Vector3): number
+---@field SetLocalRotation fun(localRotation: Quaternion): number
+---@field IsGrabbed fun(): boolean
+ExportSystemCamera = {}
+
+---マテリアル
+---@class ExportMaterial
+---@field GetNames fun(): string[]
+---@field GetColorFromIndex fun(index: number): Color
+---@field GetColor fun(name: string): Color
+---@field GetEmissionColorFromIndex fun(index: number): Color
+---@field GetEmissionColor fun(name: string): Color
+---@field GetTextureOffsetFromIndex fun(index: number): Vector2
+---@field GetTextureOffset fun(name: string): Vector2
+---@field SetColorFromIndex fun(index: number, color: Color): void
+---@field _ALL_SetColorFromIndex fun(index: number, color: Color): void
+---@field SetColor fun(name: string, color: Color): void
+---@field _ALL_SetColor fun(name: string, color: Color): void
+---@field SetEmissionColorFromIndex fun(index: number, color: Color): void
+---@field _ALL_SetEmissionColorFromIndex fun(index: number, color: Color): void
+---@field SetEmissionColor fun(name: string, color: Color): void
+---@field _ALL_SetEmissionColor fun(name: string, color: Color): void
+---@field SetTextureOffsetFromIndex fun(index: number, offset: Vector2): void
+---@field _ALL_SetTextureOffsetFromIndex fun(index: number, offset: Vector2): void
+---@field SetTextureOffset fun(name: string, offset: Vector2): void
+---@field _ALL_SetTextureOffset fun(name: string, offset: Vector2): void
+---@field SetStereoTextureScaleOffsetFromIndex fun(index: number, leftScaleOffset: Vector4, rightScaleOffset: Vector4): void
+---@field _ALL_SetStereoTextureScaleOffsetFromIndex fun(index: number, leftScaleOffset: Vector4, rightScaleOffset: Vector4): void
+---@field SetStereoTextureScaleOffset fun(name: string, leftScaleOffset: Vector4, rightScaleOffset: Vector4): void
+---@field _ALL_SetStereoTextureScaleOffset fun(name: string, leftScaleOffset: Vector4, rightScaleOffset: Vector4): void
+---@field ResetFromIndex fun(index: number): void
+---@field _ALL_ResetFromIndex fun(index: number): void
+---@field Reset fun(name: string): void
+---@field _ALL_Reset fun(name: string): void
+---@field SetTexture fun(name: string, textureId: string): void
+---@field _ALL_SetTexture fun(name: string, textureId: string): void
+---@field SetTextureFromIndex fun(index: number, textureId: string): void
+---@field _ALL_SetTextureFromIndex fun(index: number, textureId: string): void
+ExportMaterial = {}
+
+---アバター
+---@class ExportAvatar
+---@field GetName fun(): string
+---@field GetId fun(): string
+---@field IsOwner fun(): boolean
+---@field GetLocalPosition fun(): Vector3
+---@field GetPosition fun(): Vector3
+---@field GetLocalRotation fun(): Quaternion
+---@field GetRotation fun(): Quaternion
+---@field GetLocalScale fun(): Vector3
+---@field GetRight fun(): Vector3
+---@field GetUp fun(): Vector3
+---@field GetForward fun(): Vector3
+---@field GetLocalToWorldMatrix fun(): Matrix4x4
+---@field GetBoneTransform fun(boneName: string): usertype
+ExportAvatar = {}
+
+---@class ExportAudioSource
+---@field Play fun(volumeScale: number, isLoop: boolean): void
+---@field _ALL_Play fun(volumeScale: number, isLoop: boolean): void
+---@field PlayOneShot fun(volumeScale: number): void
+---@field _ALL_PlayOneShot fun(volumeScale: number): void
+---@field Stop fun(): void
+---@field _ALL_Stop fun(): void
+---@field Pause fun(isPause: boolean): void
+---@field _ALL_Pause fun(isPause: boolean): void
+---@field ClipName string
+ExportAudioSource = {}
+
+---@class ExportPhotographyCamera
+---@field TakePhotograph fun(): usertype
+---@field GetCameraPreviewTextureId fun(): string
+---@field SetOnTakePhotoCallback fun(callback: usertype): void
+---@field GetAspectRatio fun(): usertype
+---@field GetVerticalFieldOfView fun(): usertype
+---@field SetVerticalFieldOfView fun(value: number): void
+---@field GetNearClipPlane fun(): usertype
+---@field SetNearClipPlane fun(value: number): void
+---@field ReleaseCamera fun(): void
+ExportPhotographyCamera = {}
+
+---@class ExportForceMode
+---@field Force ExportForceMode
+---@field Impulse ExportForceMode
+ExportForceMode = {}
+
+---VirtualCast拡張
+---@class ExportVc
+---@field GetSpaceType fun(): ExportVcSpaceType
+---@field room ExportRoom
+---@field spaceTypes ExportVcSpaceType
+ExportVc = {}
+
+---ルーム情報
+---@class ExportRoom
+---@field GetGravity fun(): Vector3
+---@field GetWalkSpeed fun(): number
+---@field GetJumpSpeed fun(): number
+---@field GetRoomKey fun(): string
+---@field GetAllPlayers fun(): ExportRoomPlayer[]
+---@field GetLocalPlayer fun(): ExportRoomPlayer
+---@field GetPlayerById fun(playerId: string): ExportRoomPlayer
+---@field OnPlayerJoined fun(callback: usertype): void
+---@field OnPlayerLeft fun(callback: usertype): void
+---@field monitorCamera ExportMonitorCamera
+ExportRoom = {}
+
+---@class ExportRoomPlayer
+---@field IsAvailable fun(): boolean
+---@field GetId fun(): string
+---@field GetName fun(): string
+---@field GetUserType fun(): string
+---@field GetIsLocal fun(): boolean
+---@field GetPosition fun(): Vector3
+---@field GetRotation fun(): Quaternion
+---@field GetForward fun(): Vector3
+---@field GetRight fun(): Vector3
+---@field GetUp fun(): Vector3
+---@field GetRoomPlayerController fun(): ExportRoomPlayerController
+---@field Character ExportCharacter
+ExportRoomPlayer = {}
+
+---@class ExportRoomPlayerController
+---@field IsGrounded fun(): boolean
+---@field GetVelocity fun(): Vector3
+---@field GetMass fun(): number
+---@field SetVelocity fun(velocity: Vector3): void
+---@field TeleportTo fun(position: Vector3, rotation: Quaternion): void
+---@field AddForce fun(force: Vector3, forceMode: ExportForceMode): void
+ExportRoomPlayerController = {}
+
+---@class ExportCharacter
+---@field IsAvailable fun(): boolean
+---@field GetBoneTransform fun(boneName: string): usertype
+ExportCharacter = {}
+
+---@class ExportMonitorCamera
+---@field GetPosition fun(): Vector3
+---@field GetRotation fun(): Quaternion
+---@field GetScale fun(): Vector3
+ExportMonitorCamera = {}
+
+---@class ExportKeyValuePair
+---@field __new fun(key: string, value: usertype): ExportKeyValuePair
+---@field key string
+---@field value usertype
+ExportKeyValuePair = {}
+
